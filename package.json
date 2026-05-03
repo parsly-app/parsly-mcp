@@ -1,0 +1,61 @@
+{
+  "name": "parsly-mcp",
+  "version": "0.0.1",
+  "description": "Real browser automation for AI agents. Parsly connects Claude, Cursor, and ChatGPT to Chrome via MCP — extract structured data from Instagram, Reddit, LinkedIn, X, and any site you can open in a tab.",
+  "license": "MIT",
+  "homepage": "https://parsly.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/parsly-app/parsly-mcp"
+  },
+  "keywords": [
+    "mcp",
+    "browser-automation",
+    "web-scraping",
+    "chrome-extension",
+    "instagram",
+    "linkedin",
+    "reddit",
+    "twitter",
+    "data-extraction"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "type": "module",
+  "bin": {
+    "parsly-mcp": "./dist/bin/parsley-mcp.js",
+    "parsly-mcp-http": "./dist/bin/parsley-mcp-http.js"
+  },
+  "main": "./dist/src/index.js",
+  "exports": {
+    ".": "./dist/src/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "tsc",
+    "start": "node dist/bin/parsley-mcp-http.js",
+    "start:stdio": "node dist/bin/parsley-mcp.js",
+    "check-types": "tsc --noEmit",
+    "version:patch": "npm version patch --no-git-tag-version",
+    "version:minor": "npm version minor --no-git-tag-version",
+    "version:major": "npm version major --no-git-tag-version"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "ws": "^8.18.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/ws": "^8.5.0",
+    "tsx": "^4.21.0",
+    "typescript": "5.9.2"
+  }
+}
