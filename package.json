@@ -1,7 +1,7 @@
 {
   "name": "parsly-mcp",
   "version": "0.0.1",
-  "description": "Real browser automation for AI agents. Parsly connects Claude, Cursor, and ChatGPT to Chrome via MCP — extract structured data from Instagram, Reddit, LinkedIn, X, and any site you can open in a tab.",
+  "description": "Real browser automation for AI agents. Parsly connects Claude, Cursor, and ChatGPT to Chrome via MCP — read structured data from any site you can open in a tab.",
   "license": "MIT",
   "homepage": "https://parsly.dev",
   "repository": {
@@ -11,13 +11,12 @@
   "keywords": [
     "mcp",
     "browser-automation",
-    "web-scraping",
+    "web-automation",
     "chrome-extension",
     "instagram",
-    "linkedin",
     "reddit",
     "twitter",
-    "data-extraction"
+    "data-reading"
   ],
   "engines": {
     "node": ">=18"

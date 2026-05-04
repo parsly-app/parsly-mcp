@@ -1,8 +1,8 @@
 # parsly-mcp
 
-Give your AI agent a browser. Parsly connects Claude, Cursor, and ChatGPT to a Chrome extension that extracts structured data from any website — Instagram profiles, Reddit threads, LinkedIn posts, product listings, and more. No scraping infrastructure required.
+Give your AI agent a browser. Parsly connects Claude, Cursor, and ChatGPT to a Chrome extension that automates browsing in the user's own authenticated session — reading what's on screen, scrolling through feeds, and structuring what a person could do manually. No external APIs or infrastructure required.
 
-Ask your AI to scrape Instagram, pull Reddit threads, or extract LinkedIn data — and it actually does it. Parsly bridges MCP to a Chrome extension running in your browser, so AI agents can collect real structured data from any site, authenticated or not.
+Parsly bridges MCP to a Chrome extension running in your browser, so AI agents can automate real browser interactions on any site you can open in a tab.
 
 ## Prerequisites
 
@@ -56,26 +56,27 @@ The server starts on stdio and opens a WebSocket bridge on `127.0.0.1:9271` (con
 
 | Tool | Description |
 |------|-------------|
-| `parsley_list_operations` | List all available extraction operations with their parameters. Call this first to discover what Parsly can do. |
-| `parsley_run_operation` | Run an operation on a URL and save results to a JSON file. Returns a summary (item count, columns, 3-row preview, file path). |
+| `parsley_list_operations` | List all available browser automation operations with their parameters. Call this first to discover what Parsly can do. |
+| `parsley_run_operation` | Run an operation in the user's browser tab and save results to a JSON file. Returns a summary (item count, columns, 3-row preview, file path). |
 | `parsley_get_status` | Check whether the Chrome extension is connected and ready. |
 | `parsley_cancel_run` | Cancel a running operation by run ID. |
+| `parsley_fetch_image` | Fetch an image URL through the browser and return it inline for display. |
 
 ### Example usage
 
 ```
-You: Scrape the top 20 posts from r/programming and save them to my Desktop.
+You: Read the top 20 posts from r/programming and save them to my Desktop.
 
 Claude: [calls parsley_run_operation with operationId="reddit-posts", url="https://reddit.com/r/programming", params={maxItems: 20}]
         Saved 20 posts to ~/Desktop/parsley/reddit-posts-abc123.json
 ```
 
-## What you can extract
+## What you can automate
 
-- **Instagram** — profile posts, reels
+- **Instagram** — profile posts, reels (with thumbnails, permalinks, engagement metrics)
 - **Reddit** — subreddit posts, post comments
-- **LinkedIn** — profile posts
 - **Twitter / X** — profile tweets
+- **YouTube** — video transcripts with timestamps
 - Any site you can open in Chrome, authenticated or not
 
 More operations are added regularly. Run `parsley_list_operations` to see the current full list.
