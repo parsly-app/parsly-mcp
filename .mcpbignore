@@ -1,0 +1,15 @@
+# Source files — not needed, bundle is self-contained
+src/
+bin/
+tsconfig.json
+
+# TypeScript compiled output — bundle replaces this
+dist/
+
+# Dev tooling and dependencies
+node_modules/
+
+# Build artifacts
+*.tgz
+*.mcpb
+dist-bundle/*.js

@@ -1,6 +1,6 @@
 {
   "name": "parsly-mcp",
-  "description": "Give your AI agent a browser. Parsly connects Claude, Cursor, and ChatGPT to a Chrome extension that extracts structured data from any website — Instagram profiles, Reddit threads, LinkedIn posts, product listings, and more. No scraping infrastructure required.",
+  "description": "Let Claude read any website for you — Instagram, Reddit, and more. Parsly connects Claude, Cursor, and ChatGPT to a Chrome extension that extracts structured data from any website you can open in a tab. No scraping infrastructure required.",
   "version": "0.0.1",
   "category": "browser-automation",
   "transport": ["stdio"],
@@ -9,23 +9,27 @@
     "package": "parsly-mcp"
   },
   "repository": "https://github.com/parsly-app/parsly-mcp",
-  "homepage": "https://parsly.dev",
+  "homepage": "https://parsly.to",
   "tools": [
     {
-      "name": "parsley_list_operations",
+      "name": "parsly_list_operations",
       "description": "List all available browser automation operations with their descriptions and parameters"
     },
     {
-      "name": "parsley_run_operation",
+      "name": "parsly_run_operation",
       "description": "Run an operation on a URL and return structured data extracted from the page"
     },
     {
-      "name": "parsley_get_status",
+      "name": "parsly_get_status",
       "description": "Check whether the Parsly Chrome extension is connected and ready"
     },
     {
-      "name": "parsley_cancel_run",
+      "name": "parsly_cancel_run",
       "description": "Cancel a currently running operation"
+    },
+    {
+      "name": "parsly_fetch_image",
+      "description": "Fetch an image URL through the Chrome extension and return it as an inline image"
     }
   ]
 }

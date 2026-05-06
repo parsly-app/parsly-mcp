@@ -1,0 +1,25 @@
+{
+  "manifest_version": "0.3",
+  "name": "parsly-mcp",
+  "display_name": "Parsly",
+  "version": "0.0.1",
+  "description": "Let Claude read any website for you — Instagram, Reddit, and more.",
+  "long_description": "Parsly lets you ask Claude to pull information from websites you're already logged into — your Instagram feed, Reddit threads, product listings, and more.\n\nJust open a tab, describe what you want, and Parsly does the rest. No exports, no API keys, no technical setup.",
+  "author": {
+    "name": "Parsly",
+    "url": "https://parsly.to"
+  },
+  "homepage": "https://parsly.to",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/parsly-app/parsly-mcp"
+  },
+  "server": {
+    "type": "node",
+    "entry_point": "dist-bundle/server.cjs",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/dist-bundle/server.cjs"]
+    }
+  }
+}

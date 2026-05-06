@@ -14,6 +14,19 @@ export class WsBridge {
   }
 
   start(): void {
+    this.wss.on("error", (err: NodeJS.ErrnoException) => {
+      if (err.code === "EADDRINUSE") {
+        console.error(
+          `[bridge] Port ${this.port} is already in use. ` +
+          "Another instance of the Parsly MCP server may already be running. " +
+          "Stop it and restart Claude Desktop.",
+        );
+      } else {
+        console.error("[bridge] WebSocket server error:", err);
+      }
+      process.exit(1);
+    });
+
     this.wss.on("connection", (ws, req) => {
       // Reject any connection that doesn't look like the extension
       const origin = req.headers.origin ?? "";

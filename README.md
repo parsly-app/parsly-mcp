@@ -6,7 +6,7 @@ Parsly bridges MCP to a Chrome extension running in your browser, so AI agents c
 
 ## Prerequisites
 
-1. **Chrome** with the [Parsly extension](https://parsly.dev) installed and active
+1. **Chrome** with the [Parsly extension](https://parsly.to) installed and active
 2. **Node.js 18+** on your machine
 3. The extension's side panel open in Chrome (click the Parsly icon)
 
@@ -29,9 +29,13 @@ Add to your `~/.cursor/mcp.json`:
 }
 ```
 
-### Claude Desktop
+### Claude Desktop — Chat mode
 
-Add to your `claude_desktop_config.json` (macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`):
+Install the `.mcpb` extension from [parsly.to](https://parsly.to) for single-click setup via Settings → Extensions → Install Extension.
+
+### Claude Desktop — Cowork mode (recommended)
+
+Cowork requires an entry in `claude_desktop_config.json` (macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`). Claude Desktop automatically bridges this into the Cowork VM:
 
 ```json
 {
@@ -44,31 +48,33 @@ Add to your `claude_desktop_config.json` (macOS: `~/Library/Application Support/
 }
 ```
 
+> **Note:** The `.mcpb` extension is not bridged to Cowork. The `claude_desktop_config.json` entry is the only path that works in Cowork.
+
 ### Manual / other clients
 
 ```bash
 npx parsly-mcp
 ```
 
-The server starts on stdio and opens a WebSocket bridge on `127.0.0.1:9271` (configurable via `PARSLEY_PORT`).
+The server starts on stdio and opens a WebSocket bridge on `127.0.0.1:9271` (configurable via `PARSLY_PORT`).
 
 ## Available Tools
 
 | Tool | Description |
 |------|-------------|
-| `parsley_list_operations` | List all available browser automation operations with their parameters. Call this first to discover what Parsly can do. |
-| `parsley_run_operation` | Run an operation in the user's browser tab and save results to a JSON file. Returns a summary (item count, columns, 3-row preview, file path). |
-| `parsley_get_status` | Check whether the Chrome extension is connected and ready. |
-| `parsley_cancel_run` | Cancel a running operation by run ID. |
-| `parsley_fetch_image` | Fetch an image URL through the browser and return it inline for display. |
+| `parsly_list_operations` | List all available browser automation operations with their parameters. Call this first to discover what Parsly can do. |
+| `parsly_run_operation` | Run an operation in the user's browser tab and save results to a JSON file. Returns a summary (item count, columns, 3-row preview, file path). |
+| `parsly_get_status` | Check whether the Chrome extension is connected and ready. |
+| `parsly_cancel_run` | Cancel a running operation by run ID. |
+| `parsly_fetch_image` | Fetch an image URL through the browser and return it inline for display. |
 
 ### Example usage
 
 ```
 You: Read the top 20 posts from r/programming and save them to my Desktop.
 
-Claude: [calls parsley_run_operation with operationId="reddit-posts", url="https://reddit.com/r/programming", params={maxItems: 20}]
-        Saved 20 posts to ~/Desktop/parsley/reddit-posts-abc123.json
+Claude: [calls parsly_run_operation with operationId="reddit-posts", url="https://reddit.com/r/programming", params={maxItems: 20}]
+        Saved 20 posts to ~/Desktop/parsly/reddit-posts-abc123.json
 ```
 
 ## What you can automate
@@ -79,16 +85,16 @@ Claude: [calls parsley_run_operation with operationId="reddit-posts", url="https
 - **YouTube** — video transcripts with timestamps
 - Any site you can open in Chrome, authenticated or not
 
-More operations are added regularly. Run `parsley_list_operations` to see the current full list.
+More operations are added regularly. Run `parsly_list_operations` to see the current full list.
 
 ## Environment Variables
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `PARSLEY_PORT` | `9271` | WebSocket port for the Chrome extension bridge |
-| `PARSLEY_OUTPUT_DIR` | `~/Desktop/parsley` | Directory where result JSON files are saved |
-| `PARSLEY_TIMEOUT` | `120` | Operation timeout in seconds |
-| `PARSLEY_RATE_LIMIT` | `2000` | Minimum milliseconds between consecutive runs |
+| `PARSLY_PORT` | `9271` | WebSocket port for the Chrome extension bridge |
+| `PARSLY_OUTPUT_DIR` | `~/Desktop/parsly` | Directory where result JSON files are saved |
+| `PARSLY_TIMEOUT` | `120` | Operation timeout in seconds |
+| `PARSLY_RATE_LIMIT` | `2000` | Minimum milliseconds between consecutive runs |
 
 ## Running multiple AI clients simultaneously
 
@@ -124,7 +130,7 @@ This starts an HTTP MCP server on `http://127.0.0.1:9270/mcp` and a single bridg
 }
 ```
 
-Set `PARSLEY_MCP_PORT` (default `9270`) and `PARSLEY_PORT` (default `9271`) to change either port.
+Set `PARSLY_MCP_PORT` (default `9270`) and `PARSLY_PORT` (default `9271`) to change either port.
 
 ## Troubleshooting
 
@@ -134,7 +140,7 @@ Set `PARSLEY_MCP_PORT` (default `9270`) and `PARSLEY_PORT` (default `9271`) to c
 - Check that the side panel shows "Connected" status
 
 **Operation times out**
-- Some sites load slowly — try increasing `PARSLEY_TIMEOUT` to `300`
+- Some sites load slowly — try increasing `PARSLY_TIMEOUT` to `300`
 - Make sure you're logged into the site in Chrome if it requires authentication
 
 **Results have fewer items than expected**
@@ -142,8 +148,8 @@ Set `PARSLEY_MCP_PORT` (default `9270`) and `PARSLEY_PORT` (default `9271`) to c
 - For infinite-scroll feeds, the operation scrolls until it reaches your target or the feed is exhausted
 
 **Port conflict**
-- If port `9271` is in use, set `PARSLEY_PORT` to another value (e.g. `9272`) in your MCP config's `env` block
+- If port `9271` is in use, set `PARSLY_PORT` to another value (e.g. `9272`) in your MCP config's `env` block
 
 ## License
 
-MIT — [parsly.dev](https://parsly.dev)
+MIT — [parsly.to](https://parsly.to)

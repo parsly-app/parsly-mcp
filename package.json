@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Real browser automation for AI agents. Parsly connects Claude, Cursor, and ChatGPT to Chrome via MCP — read structured data from any site you can open in a tab.",
   "license": "MIT",
-  "homepage": "https://parsly.dev",
+  "homepage": "https://parsly.to",
   "repository": {
     "type": "git",
     "url": "https://github.com/parsly-app/parsly-mcp"
@@ -23,8 +23,8 @@
   },
   "type": "module",
   "bin": {
-    "parsly-mcp": "./dist/bin/parsley-mcp.js",
-    "parsly-mcp-http": "./dist/bin/parsley-mcp-http.js"
+    "parsly-mcp": "./dist/bin/parsly-mcp.js",
+    "parsly-mcp-http": "./dist/bin/parsly-mcp-http.js"
   },
   "main": "./dist/src/index.js",
   "exports": {
@@ -32,6 +32,8 @@
   },
   "files": [
     "dist",
+    "dist-bundle",
+    "manifest.json",
     "README.md",
     "CHANGELOG.md",
     "LICENSE"
@@ -39,8 +41,10 @@
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "tsc",
-    "start": "node dist/bin/parsley-mcp-http.js",
-    "start:stdio": "node dist/bin/parsley-mcp.js",
+    "bundle": "esbuild bin/parsly-mcp.ts --bundle --platform=node --format=cjs --outfile=dist-bundle/server.cjs",
+    "pack": "npm run bundle && mcpb pack && mv mcp.mcpb parsly-mcp.mcpb",
+    "start": "node dist/bin/parsly-mcp-http.js",
+    "start:stdio": "node dist/bin/parsly-mcp.js",
     "check-types": "tsc --noEmit",
     "version:patch": "npm version patch --no-git-tag-version",
     "version:minor": "npm version minor --no-git-tag-version",
@@ -52,8 +56,10 @@
     "zod": "^3.23.0"
   },
   "devDependencies": {
+    "@anthropic-ai/mcpb": "latest",
     "@types/node": "^22.0.0",
     "@types/ws": "^8.5.0",
+    "esbuild": "latest",
     "tsx": "^4.21.0",
     "typescript": "5.9.2"
   }
